@@ -95,25 +95,32 @@
 </body>
 <script>
     $(document).ready(function() {
+        let non = false
         $('#non').hover(function() {
             $(this).hide();
             $('#non2').show();
         });
-        $('#non').click(function() {
+        $('#non').on('click touchstart', function(event) {
+            event.stopPropagation();
             $(this).hide();
             $('#non2').show();
+            non = false
         });
         $('#non2').hover(function() {
             $(this).hide();
             $('#non').show();
         });
-        $('#non2').click(function() {
+        $('#non2').on('click touchstart', function(event) {
+            event.stopPropagation();
             $(this).hide();
             $('#non').show();
+            non = false
         });
         $('#oui').click(function() {
-            $('#question').hide();
-            $('#confirm').show();
+            if(!non) {
+                $('#question').hide();
+                $('#confirm').show();
+            }
         })
         $('#click').click(function() {
             $('#err-text').hide();
