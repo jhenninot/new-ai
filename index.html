@@ -95,7 +95,6 @@
 </body>
 <script>
     $(document).ready(function() {
-        let non = false
         $('#non').hover(function() {
             $(this).hide();
             $('#non2').show();
@@ -104,7 +103,6 @@
             event.stopPropagation();
             $(this).hide();
             $('#non2').show();
-            non = false
         });
         $('#non2').hover(function() {
             $(this).hide();
@@ -114,13 +112,12 @@
             event.stopPropagation();
             $(this).hide();
             $('#non').show();
-            non = false
         });
         $('#oui').click(function() {
-            if(!non) {
+
                 $('#question').hide();
                 $('#confirm').show();
-            }
+
         })
         $('#click').click(function() {
             $('#err-text').hide();
