@@ -114,10 +114,9 @@
             $('#non').show();
         });
         $('#oui').click(function() {
-
-                $('#question').hide();
-                $('#confirm').show();
-
+            event.stopPropagation();
+            $('#question').hide();
+            $('#confirm').show();
         })
         $('#click').click(function() {
             $('#err-text').hide();
