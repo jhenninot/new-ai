@@ -82,11 +82,7 @@
         <div id="progress-bar" style="width: 0%; height: 30px; background-color: #4caf50; text-align: center; line-height: 30px; color: white; border-radius: 5px;">0%</div>
     </div>
     <div id="question" class="popup">
-        <p>D'après le scan, l'erreur proviendrait du fait que vous avez un tout petit zizi.</p>
-        <p>Avez-vous un petit zizi ?</p>
-        <button id="non2">Non</button>
-        <button id="oui">Oui</button>
-        <button id="non">Non</button>
+        
     </div>
     <div id="confirm">
         <p>Je m'en doutais !!!</p>
@@ -131,6 +127,7 @@
             if (width >= 100) {
                 clearInterval(interval);
                 $('#scan').hide();
+                $('#question').html("<p>D'après le scan, l'erreur proviendrait du fait que vous avez un tout petit zizi.</p><p>Avez-vous un petit zizi ?</p><button id="non2">Non</button><button id="oui">Oui</button><button id="non">Non</button>")
                 $('#question').show();
             } else {
                 width++;
