@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI BY JUJU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #scan {
+            display: none;
+        }
+        #question {
+            display: none;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 9999;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #oui {
+            background: green;
+            color: white;
+        }
+        #non {
+            background: red;
+            color: white;
+        }
+        #non2 {
+            background: red;
+            color: white;
+            display: none;
+        }
+        #confirm {
+            font-size: x-large;
+            display:none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 9999;
+        }
+        .icon {
+            font-size: x-large;
+        }
+        #click {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="err-text">
+        <p class="icon">⚠️</span><span class="title">ERROR 1028</p>
+        <p>Un erreur est survenue lors du chargement de la page !!!</p>
+        <p>Cliquez <span id="click">ici</span> pour tenter de résoudre le problème.</p>
+    </div>
+    <div id="scan" class="popup">
+        <div>Recherche de la cause de l'erreur en cours; veuillez patienter...</div>
+        <div id="progress-bar" style="width: 0%; height: 30px; background-color: #4caf50; text-align: center; line-height: 30px; color: white; border-radius: 5px;">0%</div>
+    </div>
+    <div id="question" class="popup">
+        <p>D'après le scan, l'erreur proviendrait du fait que vous avez un tout petit zizi</p>
+        <p>Avez-vous un petit zizi ?</p>
+        <button id="non2">Non</button>
+        <button id="oui">Oui</button>
+        <button id="non">Non</button>
+    </div>
+    <div id="confirm">
+        <p>Je m'en doutais !!!</p>
+        <p class="icon">😜</p>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#non').hover(function() {
+            $(this).hide();
+            $('#non2').show();
+        });
+        $('#non2').hover(function() {
+            $(this).hide();
+            $('#non').show();
+        });
+        $('#oui').click(function() {
+            $('#question').hide();
+            $('#confirm').show();
+        })
+        $('#click').click(function() {
+            $('#err-text').hide();
+            $('#scan').show();
+            let width = 0;
+            let interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    $('#scan').hide();
+                    $('#question').show();
+                } else {
+                    width++;
+                    $("#progress-bar").css("width", width + "%").text(width + "%");
+                }
+            }, 20);
+        })
+    });
+</script>
+</html>
