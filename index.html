@@ -113,7 +113,7 @@
             $(this).hide();
             $('#non').show();
         });
-        $('#oui').click(function() {
+        $('#oui').click(function(event) {
             event.stopPropagation();
             $('#question').hide();
             $('#confirm').show();
