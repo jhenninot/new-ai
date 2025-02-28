@@ -95,44 +95,53 @@
 </body>
 <script>
     $(document).ready(function() {
-        $('#non').hover(function() {
-            $(this).hide();
-            $('#non2').show();
-        });
-        $('#non').on('click touchstart', function(event) {
-            event.stopPropagation();
-            $(this).hide();
-            $('#non2').show();
-        });
-        $('#non2').hover(function() {
-            $(this).hide();
-            $('#non').show();
-        });
-        $('#non2').on('click touchstart', function(event) {
-            event.stopPropagation();
-            $(this).hide();
-            $('#non').show();
-        });
-        $('#oui').click(function(event) {
-            event.stopPropagation();
-            $('#question').hide();
-            $('#confirm').show();
-        })
-        $('#click').click(function() {
-            $('#err-text').hide();
-            $('#scan').show();
-            let width = 0;
-            let interval = setInterval(function() {
-                if (width >= 100) {
-                    clearInterval(interval);
-                    $('#scan').hide();
-                    $('#question').show();
-                } else {
-                    width++;
-                    $("#progress-bar").css("width", width + "%").text(width + "%");
-                }
-            }, 20);
-        })
+    let reponseValidee = false; // Variable pour s'assurer qu'on ne valide pas avec "non"
+
+    $('#non').hover(function() {
+        $(this).hide();
+        $('#non2').show();
     });
+
+    $('#non').on('click touchstart', function(event) {
+        event.preventDefault();
+        $(this).hide();
+        $('#non2').show();
+        reponseValidee = false; // Empêche la validation
+    });
+
+    $('#non2').hover(function() {
+        $(this).hide();
+        $('#non').show();
+    });
+
+    $('#non2').on('click touchstart', function(event) {
+        event.preventDefault();
+        $(this).hide();
+        $('#non').show();
+        reponseValidee = false; // Empêche la validation
+    });
+
+    $('#oui').click(function() {
+        reponseValidee = true; // Valide la réponse uniquement si on clique sur "oui"
+        $('#question').hide();
+        $('#confirm').show();
+    });
+
+    $('#click').click(function() {
+        $('#err-text').hide();
+        $('#scan').show();
+        let width = 0;
+        let interval = setInterval(function() {
+            if (width >= 100) {
+                clearInterval(interval);
+                $('#scan').hide();
+                $('#question').show();
+            } else {
+                width++;
+                $("#progress-bar").css("width", width + "%").text(width + "%");
+            }
+        }, 20);
+    });
+});
 </script>
 </html>
