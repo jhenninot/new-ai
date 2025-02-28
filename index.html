@@ -95,34 +95,29 @@
 </body>
 <script>
     $(document).ready(function() {
-    let reponseValidee = false; // Variable pour s'assurer qu'on ne valide pas avec "non"
+    let reponseValidee = false; // Variable pour éviter la validation non voulue
 
-    $('#non').hover(function() {
-        $(this).hide();
-        $('#non2').show();
-    });
-
-    $('#non').on('click touchstart', function(event) {
+    $('#non').on('mouseenter touchstart', function(event) {
         event.preventDefault();
         $(this).hide();
         $('#non2').show();
-        reponseValidee = false; // Empêche la validation
     });
 
-    $('#non2').hover(function() {
-        $(this).hide();
-        $('#non').show();
-    });
-
-    $('#non2').on('click touchstart', function(event) {
+    $('#non2').on('mouseenter touchstart', function(event) {
         event.preventDefault();
         $(this).hide();
         $('#non').show();
-        reponseValidee = false; // Empêche la validation
     });
 
-    $('#oui').click(function() {
-        reponseValidee = true; // Valide la réponse uniquement si on clique sur "oui"
+    $('#non, #non2').on('click touchstart', function(event) {
+        event.preventDefault();
+        reponseValidee = false; // On s'assure que la réponse n'est pas validée
+        alert("Tu as cliqué sur Non !"); // Debug: voir si l'événement est bien pris en compte
+    });
+
+    $('#oui').on('click touchstart', function(event) {
+        event.preventDefault();
+        reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
         $('#confirm').show();
     });
@@ -143,5 +138,6 @@
         }, 20);
     });
 });
+
 </script>
 </html>
