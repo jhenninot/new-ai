@@ -118,7 +118,7 @@
         localStorage.setItem('uuid',uuid);
     }
     
-    const visit = fetchVisitCount(uuid);
+    const visit = await fetchVisitCount(uuid);
     console.log('visit',visit)
     $('#visit-count').html(visit.nb)
     
