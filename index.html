@@ -94,13 +94,14 @@
     </div>
 </body>
 <script>
-    async function fetchVisitCount(page) {
+    async function fetchVisitCount(uuid,page) {
         let url = 'https://log.henninot.org/insertcount/new-ai'
         let id = "visit"
         if (page) {
             url += '_' + page
             id += '_' + page
         }
+        url += '/' + uuid
         const response = await fetch(url);
         const data = await response.json();
         document.getElementById(id).textContent = data.nb;
@@ -121,7 +122,7 @@
         console.log('visiteur déjà connu !')
     }
     
-    fetchVisitCount();
+    fetchVisitCount(uuid);
     
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
@@ -147,7 +148,7 @@
         event.preventDefault();
         reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
-        fetchVisitCount('final');
+        fetchVisitCount(uuid,'final');
         $('#confirm').show();
     });
 
