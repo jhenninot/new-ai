@@ -76,6 +76,7 @@
         <p class="icon">⚠️</span><span class="title">ERROR 1028</p>
         <p>Un erreur est survenue lors du chargement de la page !!!</p>
         <p>Cliquez <span id="click">ici</span> pour tenter de résoudre le problème.</p>
+        <div id="unique-visit-count"></div>
     </div>
     <div id="scan" class="popup">
         <div style="margin-bottom: 10px">Recherche de la cause de l'erreur en cours; veuillez patienter...</div>
@@ -95,6 +96,20 @@
     </div>
 </body>
 <script>
+    fetch('https://log.henninot.org/insertcount/new-ai', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ fingerprint })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('unique-visit-count').textContent = data.count;
+        });
+
+
+    
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
 
