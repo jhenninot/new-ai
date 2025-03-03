@@ -146,7 +146,7 @@
         event.preventDefault();
         reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
-        let final = fetchVisitCount(uuid,'final');
+        let final = await fetchVisitCount(uuid,'final');
         $('#final-count').html(final.nb)
         $('#confirm').show();
     });
