@@ -101,6 +101,7 @@
         const data = await response.json();
         document.getElementById('visit-count').textContent = data.nb;
     }
+    fetchVisitCount();
     
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
@@ -126,6 +127,7 @@
         event.preventDefault();
         reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
+        fetchVisitCount(final);
         $('#confirm').show();
     });
 
