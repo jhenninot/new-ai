@@ -94,15 +94,13 @@
     </div>
 </body>
 <script>
-    async function fetchVisitCount() {
-            const response = await fetch('https://log.henninot.org/insertcount/new-ai');
-            const data = await response.json();
-            document.getElementById('visit-count').textContent = data.nb;
-        }
-
-        // Appeler la fonction au chargement de la page
-        fetchVisitCount();
-
+    async function fetchVisitCount(page) {
+        let url = 'https://log.henninot.org/insertcount/new-ai'
+        if (page) url += '_' + page
+        const response = await fetch( + _page);
+        const data = await response.json();
+        document.getElementById('visit-count').textContent = data.nb;
+    }
     
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
