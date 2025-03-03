@@ -90,7 +90,7 @@
     <div id="confirm">
         <p>Je m'en doutais !!!</p>
         <p class="icon">😜</p>
-        <p>Nombre de petits zizis déjà référencés : <span id="visit_final">Chargement...</span></p>
+        <p>Nombre de petits zizis déjà référencés : <span id="final-count">Chargement...</span></p>
     </div>
 </body>
 <script>
@@ -119,6 +119,7 @@
     }
     
     const visit = fetchVisitCount(uuid);
+    console.log('visit',visit)
     $('#visit-count').html(visit.nb)
     
     $(document).ready(function() {
@@ -145,7 +146,8 @@
         event.preventDefault();
         reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
-        fetchVisitCount(uuid,'final');
+        let final = fetchVisitCount(uuid,'final');
+        $('#final-count').html(final.nb)
         $('#confirm').show();
     });
 
