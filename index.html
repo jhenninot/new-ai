@@ -118,9 +118,8 @@
         localStorage.setItem('uuid',uuid);
     }
     
-    const visit = await fetchVisitCount(uuid);
-    console.log('visit',visit)
-    $('#visit-count').html(visit.nb)
+    let visit = fetchVisitCount(uuid);
+    visit.then((data) => $('#visit-count').html(data.nb))
     
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
@@ -146,8 +145,8 @@
         event.preventDefault();
         reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
-        let final = await fetchVisitCount(uuid,'final');
-        $('#final-count').html(final.nb)
+        let final = fetchVisitCount(uuid,'final');
+        final.then((data) => $('#final-count').html(final.nb))
         $('#confirm').show();
     });
 
