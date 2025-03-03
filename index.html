@@ -111,7 +111,16 @@
         (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
       );
     }
-    console.log('uuid',uuidv4())
+
+    let uuid = localStorage.getItem(uuid);
+    if (!uuid) {
+        console.log ('première visite !');
+        uuid = uuidv4();
+        localStorage.setItem(uuid);
+    } else {
+        console.log('visiteur déjà connu !')
+    }
+    
     fetchVisitCount();
     
     $(document).ready(function() {
