@@ -73,7 +73,7 @@
 </head>
 <body>
     <div id="err-text">
-        <p class="icon">⚠️</span><span class="title">ERROR CODE #<span id="visit"></span>_1028</p>
+        <p class="icon">⚠️</span><span class="title">ERROR CODE #<span id="visit-count"></span>_1028</p>
         <p>Un erreur est survenue lors du chargement de la page !!!</p>
         <p>Cliquez <span id="click">ici</span> pour tenter de résoudre le problème.</p>
     </div>
@@ -99,12 +99,11 @@
         let id = "visit"
         if (page) {
             url += '_' + page
-            id += '_' + page
         }
         url += '/' + uuid
         const response = await fetch(url);
         const data = await response.json();
-        document.getElementById(id).textContent = data.nb;
+        return data
     }
 
     function uuidv4() {
@@ -119,7 +118,8 @@
         localStorage.setItem('uuid',uuid);
     }
     
-    fetchVisitCount(uuid);
+    let visit = fetchVisitCount(uuid);
+    $('#visit-count').html(data.nb)
     
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
