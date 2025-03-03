@@ -91,6 +91,7 @@
         <p>Je m'en doutais !!!</p>
         <p class="icon">😜</p>
         <p>Nombre de petits zizis déjà référencés : <span id="final-count">beaucoup !</span></p>
+        <div id="uuid-count"></div>
     </div>
 </body>
 <script>
@@ -148,6 +149,9 @@
         let final = fetchVisitCount(uuid,'final');
         final.then((data) => {
             $('#final-count').html(data.nb)
+            let txt = null
+            if (data.id_nb > 1) txt = "Vous semblez y prendre goût; c'est déjà la " + data.nb + "ème fois que vous venez..."
+            $('#uuid-count').html(txt)
         })
         $('#confirm').show();
     });
