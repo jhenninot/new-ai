@@ -19,6 +19,8 @@
         }
         .popup {
             position: fixed;
+            max-width: 600px;
+            min-width: 250px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -51,15 +53,6 @@
         #confirm {
             font-size: x-large;
             display:none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            z-index: 9999;
         }
         .icon {
             font-size: x-large;
@@ -90,7 +83,7 @@
         <button id='oui'>Oui</button>
         <button id='non'>Non</button>
     </div>
-    <div id="confirm">
+    <div id="confirm" class="popup">
         <p>Je m'en doutais !!!</p>
         <p class="icon">😜</p>
         <div class="commentaires">
