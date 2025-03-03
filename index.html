@@ -97,7 +97,7 @@
     async function fetchVisitCount(page) {
         let url = 'https://log.henninot.org/insertcount/new-ai'
         if (page) url += '_' + page
-        const response = await fetch( + _page);
+        const response = await fetch(url);
         const data = await response.json();
         document.getElementById('visit-count').textContent = data.nb;
     }
