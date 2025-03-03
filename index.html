@@ -146,7 +146,9 @@
         reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
         let final = fetchVisitCount(uuid,'final');
-        final.then((data) => $('#final-count').html(final.nb))
+        final.then((data) => {
+            $('#final-count').html(data.nb)
+        })
         $('#confirm').show();
     });
 
