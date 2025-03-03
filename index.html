@@ -118,8 +118,8 @@
         localStorage.setItem('uuid',uuid);
     }
     
-    let visit = fetchVisitCount(uuid);
-    $('#visit-count').html(data.nb)
+    const visit = fetchVisitCount(uuid);
+    $('#visit-count').html(visit.nb)
     
     $(document).ready(function() {
     let reponseValidee = false; // Variable pour éviter la validation non voulue
