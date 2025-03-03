@@ -150,7 +150,7 @@
         final.then((data) => {
             $('#final-count').html(data.nb)
             let txt = null
-            if (data.id_nb > 1) txt = "Vous semblez y prendre goût; c'est déjà la " + data.nb + "ème fois que vous venez..."
+            if (data.id_nb > 1) txt = "Vous semblez y prendre goût; c'est déjà la " + data.id_nb + "ème fois que vous venez..."
             $('#uuid-count').html(txt)
         })
         $('#confirm').show();
