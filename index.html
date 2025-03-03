@@ -73,7 +73,7 @@
 </head>
 <body>
     <div id="err-text">
-        <p class="icon">⚠️</span><span class="title">ERROR 1028</p>
+        <p class="icon">⚠️</span><span class="title">ERROR CODE #<span id="visit"></span>1028</p>
         <p>Un erreur est survenue lors du chargement de la page !!!</p>
         <p>Cliquez <span id="click">ici</span> pour tenter de résoudre le problème.</p>
     </div>
@@ -90,16 +90,20 @@
     <div id="confirm">
         <p>Je m'en doutais !!!</p>
         <p class="icon">😜</p>
-        <p>Nombre de petits zizis déjà référencés : <span id="visit-count">Chargement...</span></p>
+        <p>Nombre de petits zizis déjà référencés : <span id="visit_final">Chargement...</span></p>
     </div>
 </body>
 <script>
     async function fetchVisitCount(page) {
         let url = 'https://log.henninot.org/insertcount/new-ai'
-        if (page) url += '_' + page
+        let id = "visit"
+        if (page) {
+            url += '_' + page
+            id += '_' + page
+        }
         const response = await fetch(url);
         const data = await response.json();
-        document.getElementById('visit-count').textContent = data.nb;
+        document.getElementById(id).textContent = data.nb;
     }
     fetchVisitCount();
     
