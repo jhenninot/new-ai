@@ -115,11 +115,8 @@
 
     let uuid = localStorage.getItem('uuid');
     if (!uuid) {
-        console.log ('première visite !');
         uuid = uuidv4();
         localStorage.setItem('uuid',uuid);
-    } else {
-        console.log('visiteur déjà connu !')
     }
     
     fetchVisitCount(uuid);
