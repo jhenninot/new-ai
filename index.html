@@ -68,12 +68,11 @@
     </style>
 </head>
 <body>
-    <div id="err-text">
+    <h1>AI BY JUJU</h1>
+    <p>L'intelligence artificielle qui te connaît bien !</p>
+    <div id="scan" class="popup">
         <p class="icon">⚠️</span><span class="title">ERROR CODE #<span id="visit-count"></span>_1028</p>
         <p>Un erreur est survenue lors du chargement de la page !!!</p>
-        <p>Cliquez <span id="click">ici</span> pour tenter de résoudre le problème.</p>
-    </div>
-    <div id="scan" class="popup">
         <div style="margin-bottom: 10px">Recherche de la cause de l'erreur en cours; veuillez patienter...</div>
         <div id="progress-bar" style="width: 0%; height: 30px; background-color: #4caf50; text-align: center; line-height: 30px; color: white; border-radius: 5px;">0%</div>
     </div>
@@ -154,8 +153,11 @@
         $('#confirm').show();
     });
 
-    $('#click').click(function() {
-        $('#err-text').hide();
+    scanforError();
+
+
+    function scanforError () {
+        //$('#err-text').hide();
         $('#scan').show();
         let width = 0;
         let interval = setInterval(function() {
@@ -168,8 +170,8 @@
                 width++;
                 $("#progress-bar").css("width", width + "%").text(width + "%");
             }
-        }, 20);
-    });
+        }, 100);
+    }
 });
 
 </script>
