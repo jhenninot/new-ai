@@ -57,10 +57,13 @@
         .icon {
             font-size: x-large;
         }
+        .big_icon {
+            font-size: 100px;
+        }
         .commentaires {
             font-size: small;
         }
-        #click {
+        .click {
             text-decoration: underline;
             color: blue;
             cursor: pointer;
@@ -71,8 +74,7 @@
     <h1>AI BY JUJU</h1>
     <p>L'intelligence artificielle qui te connaît bien !</p>
     <div id="scan" class="popup">
-        <p class="icon">⚠️</span><span class="title">ERROR CODE #<span id="visit-count"></span>_1028</p>
-        <p>Un erreur est survenue lors du chargement de la page !!!</p>
+        <p> ⚠️ Une erreur est survenue lors du chargement de la page !!!</p>
         <div style="margin-bottom: 10px">Recherche de la cause de l'erreur en cours; veuillez patienter...</div>
         <div id="progress-bar" style="width: 0%; height: 30px; background-color: #4caf50; text-align: center; line-height: 30px; color: white; border-radius: 5px;">0%</div>
     </div>
@@ -83,11 +85,29 @@
         <button id='non'>Non</button>
     </div>
     <div id="confirm" class="popup">
-        <p>Je m'en doutais !!!</p>
-        <p class="icon">😜</p>
+        <div>Je m'en doutais !!!</div>
+        <div class="big_icon">😜</div>
         <div class="commentaires">
             <p>Nombre de petits zizis déjà référencés : <span id="final-count">beaucoup !</span></p>
-            <div id="uuid-count"></div>
+            <div id="stats" style="display:none">
+                <center>
+                    <table>
+                        <tr>
+                            <td>Aujourd'hui : </td>
+                            <td><span id="today"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Cette semaine : </td>
+                            <td><span id="this_week"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Ce mois-ci : </td>
+                            <td><span id="this_month"></span></td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+            <div id="uuid-count" style="margin-top:10px"></div>
         </div>
     </div>
 </body>
@@ -120,7 +140,6 @@
     visit.then((data) => $('#visit-count').html(data.nb))
     
     $(document).ready(function() {
-    let reponseValidee = false; // Variable pour éviter la validation non voulue
 
     $('#non').on('mouseenter touchstart', function(event) {
         event.preventDefault();
@@ -136,16 +155,17 @@
 
     $('#non, #non2').on('click touchstart', function(event) {
         event.preventDefault();
-        reponseValidee = false;
     });
 
     $('#oui').on('click touchstart', function(event) {
         event.preventDefault();
-        reponseValidee = true; // Seul "Oui" valide la réponse
         $('#question').hide();
-        let final = fetchVisitCount(uuid,'final');
+        let final = fetchVisitCount(uuid);
         final.then((data) => {
             $('#final-count').html(data.nb)
+            $('#today').html(data.stats.today)
+            $('#this_week').html(data.stats.this_week)
+            $('#this_month').html(data.stats.this_month)
             let txt = null
             if (data.id_nb > 1) txt = "Vous semblez y prendre goût; c'est déjà la " + data.id_nb + "ème fois que vous venez..."
             $('#uuid-count').html(txt)
@@ -153,25 +173,25 @@
         $('#confirm').show();
     });
 
-    scanforError();
-
-
-    function scanforError () {
-        //$('#err-text').hide();
-        $('#scan').show();
-        let width = 0;
-        let interval = setInterval(function() {
-            if (width >= 100) {
-                clearInterval(interval);
-                $('#scan').hide();
-                $('#question-content').html("<p>D'après le scan, l'erreur proviendrait du fait que vous avez un tout petit zizi.</p><p>Avez-vous un petit zizi ?</p>")
-                $('#question').show();
-            } else {
-                width++;
-                $("#progress-bar").css("width", width + "%").text(width + "%");
-            }
-        }, 100);
-    }
+    $('#final-count').on('click touchstart', function(event) {
+        event.preventDefault();
+        $('#stats').toggle();
+    });
+   
+    $('#scan').show();
+    let width = 0;
+    let interval = setInterval(function() {
+        if (width >= 100) {
+            clearInterval(interval);
+            $('#scan').hide();
+            $('#question-content').html("<p>D'après le scan, l'erreur proviendrait du fait que vous avez un tout petit zizi.</p><p>Avez-vous un petit zizi ?</p>")
+            $('#question').show();
+        } else {
+            width++;
+            $("#progress-bar").css("width", width + "%").text(width + "%");
+        }
+    }, 100);
+    
 });
 
 </script>
