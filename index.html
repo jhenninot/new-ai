@@ -86,8 +86,9 @@
     </div>
     <div id="confirm" class="popup">
         <div>Je m'en doutais !!!</div>
-        <div class="big_icon">😜</div>
-        <div class="commentaires">
+        <div id="show_commentaires" class="big_icon">😜</div>
+        <div id="uuid-count" class="commentaires" style="margin-top:10px"></div>
+        <div id="commentaires" class="commentaires" style="display: none;">
             <p>Nombre de petits zizis déjà référencés : <span id="final-count">beaucoup !</span></p>
             <div id="stats" style="display:none">
                 <center>
@@ -107,7 +108,7 @@
                     </table>
                 </center>
             </div>
-            <div id="uuid-count" style="margin-top:10px"></div>
+            
         </div>
     </div>
 </body>
@@ -167,7 +168,7 @@
             $('#this_week').html(data.stats.this_week)
             $('#this_month').html(data.stats.this_month)
             let txt = null
-            if (data.id_nb > 1) txt = "Vous semblez y prendre goût; c'est déjà la " + data.id_nb + "ème fois que vous venez..."
+            if (data.id_nb > 1) txt = "Vous semblez y prendre goût; c'est déjà la " + data.id_nb + "<sup>ème</sup> fois que vous venez..."
             $('#uuid-count').html(txt)
         })
         $('#confirm').show();
@@ -176,6 +177,12 @@
     $('#final-count').on('click touchstart', function(event) {
         event.preventDefault();
         $('#stats').toggle();
+    });
+
+    //show_commentaires
+    $('#show_commentaires').on('click touchstart', function(event) {
+        event.preventDefault();
+        $('#commentaires').toggle();
     });
    
     $('#scan').show();
