@@ -113,7 +113,7 @@
     </div>
 </body>
 <script>
-    async function fetchVisitCount(uuid, src , publish=false) {
+    async function fetchVisitCount(uuid, src='new-ai' , publish=false) {
         let url = 'https://log.henninot.org/insertcount'
         const body = {
             uuid: uuid,
@@ -144,7 +144,7 @@
         localStorage.setItem('uuid',uuid);
     }
     
-    let visit = fetchVisitCount(uuid,'accueil',true);
+    let visit = fetchVisitCount(uuid,'new-ai',true);
     visit.then((data) => $('#visit-count').html(data.nb))
     
     $(document).ready(function() {
@@ -168,7 +168,7 @@
     $('#oui').on('click touchstart', function(event) {
         event.preventDefault();
         $('#question').hide();
-        let final = fetchVisitCount(uuid,'resultat',false);
+        let final = fetchVisitCount(uuid);
         final.then((data) => {
             $('#final-count').html(data.nb)
             $('#today').html(data.stats.today)
