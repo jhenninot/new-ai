@@ -113,14 +113,21 @@
     </div>
 </body>
 <script>
-    async function fetchVisitCount(uuid,page) {
-        let url = 'https://log.henninot.org/insertcount/new-ai'
-        let id = "visit"
-        if (page) {
-            url += '_' + page
+    async function fetchVisitCount(uuid, src , publish=false) {
+        let url = 'https://log.henninot.org/insertcount'
+        const body = {
+            uuid: uuid,
+            src: src,
+            publish: publish
         }
-        url += '/' + uuid
-        const response = await fetch(url);
+
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
         const data = await response.json();
         return data
     }
@@ -137,7 +144,7 @@
         localStorage.setItem('uuid',uuid);
     }
     
-    let visit = fetchVisitCount(uuid);
+    let visit = fetchVisitCount(uuid,'accueil',true);
     visit.then((data) => $('#visit-count').html(data.nb))
     
     $(document).ready(function() {
@@ -161,7 +168,7 @@
     $('#oui').on('click touchstart', function(event) {
         event.preventDefault();
         $('#question').hide();
-        let final = fetchVisitCount(uuid);
+        let final = fetchVisitCount(uuid,'resultat',false);
         final.then((data) => {
             $('#final-count').html(data.nb)
             $('#today').html(data.stats.today)
